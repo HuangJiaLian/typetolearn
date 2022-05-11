@@ -1,13 +1,10 @@
 /* Import Google Font - Poppins */
-
-
 @import url('https://fonts.googleapis.com/css?family=Space+Mono%7CMontserrat:800%7CRubik:300,400,700%7CRoboto+Mono:400');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* font-family: 'Poppins', sans-serif; */
   font-family: 'Space Mono', sans-serif;
 }
 body{
@@ -18,10 +15,10 @@ body{
   min-height: 100vh;
   background: #ceece7;
 }
-::selection{
+/* ::selection{
   color: #fff;
   background: #17A2B8;
-}
+} */
 .wrapper{
   width: 90%;
   /* height: 90%; */
@@ -41,7 +38,7 @@ body{
   border: 1px solid #bfbfbf;
 }
 .content-box .typing-text{
-  overflow: hidden;
+  overflow: scroll;
   max-height: 256px;
 }
 .typing-text::-webkit-scrollbar{
@@ -55,6 +52,7 @@ body{
 }
 .typing-text p span{
   position: relative;
+  /* background: #ffffff; */
 }
 
 .typing-text p span.correct{
@@ -161,10 +159,11 @@ li:not(:first-child) span{
     padding: 20px 0;
   }
   .content-box .typing-text{
-    max-height: 100%;
+    max-height: 256px;
+    overflow-y: hidden;
   }
   .typing-text p{
-    font-size: 19px;
+    font-size: 39px;
     text-align: left;
   }
   .content button{

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - youtube.com/codingnepal -->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">  
@@ -8,6 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
+    <audio id="key">
+      <source src="https://cdn.jsdelivr.net/gh/HuangJiaLian/DataBase0@master/uPic/2022_05_12_02_key.wav" type="audio/mpeg">
+    </audio>
+    <audio id="error">
+      <source src="https://cdn.jsdelivr.net/gh/HuangJiaLian/DataBase0@master/uPic/2022_05_12_02_error.wav" type="audio/mpeg">
+    </audio>
+    <audio class="tape">
+      <!-- Placeholder: Add Inner text in Javascript -->
+    </audio>
     <div class="wrapper">
       <input type="text" class="input-field">
       <div class="content-box">
@@ -34,6 +42,8 @@
             </li>
           </ul>
           <button>Try Again</button>
+          <button onclick="playTape()" type="button">Play Tape</button>
+          <button onclick="pauseTape()" type="button">Pause Tape</button>   
         </div>
       </div>
     </div>

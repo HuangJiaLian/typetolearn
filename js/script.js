@@ -1,30 +1,48 @@
 const typingText = document.querySelector(".typing-text p"),
+tapeSource = document.querySelector(".tape"),
 inpField = document.querySelector(".wrapper .input-field"),
 tryAgainBtn = document.querySelector(".content button"),
 timeTag = document.querySelector(".time span b"),
 mistakeTag = document.querySelector(".mistake span"),
 wpmTag = document.querySelector(".wpm span"),
 cpmTag = document.querySelector(".cpm span");
+keySound = document.getElementById("key"); 
+errorSound = document.getElementById("error"); 
+lessonTape = document.querySelector(".tape"); 
 
 let timer,
 maxTime = 600,
 timeLeft = maxTime,
 charIndex = mistakes = isTyping = 0;
 
+function playKeySound() {
+    keySound.currentTime = 0
+    keySound.play(); 
+} 
+
+function playErrorSound() {
+    errorSound.currentTime = 0
+    errorSound.play(); 
+} 
+
+function playTape() {
+    lessonTape.playbackRate = 0.5
+    lessonTape.play()
+}
+
+function pauseTape() {
+    lessonTape.pause()
+}
 function loadParagraph() {
-    const ranIndex = Math.floor(Math.random() * paragraphs.length);
+    const ranIndex = Math.floor(Math.random() * data.length);
     typingText.innerHTML = "";
-    console.log(paragraphs[ranIndex])
-    console.log(paragraphs[ranIndex].split(" "))
+    tapeSource.innerHTML = "";
+    let source = `<source src="${data[ranIndex]['audio_uk']}" type="audio/mpeg">`
+    tapeSource.innerHTML += source;
 
-    // paragraphs[ranIndex].split(" ").forEach(word => {
-    //     let span = `<span>${word}</span>`
-    //     typingText.innerHTML += span;
-    // });
-
-    paragraphs[ranIndex].split("").forEach(char => {
-        let span = `<span>${char}</span>`
-        typingText.innerHTML += span;
+    data[ranIndex]['content'].split("").forEach(char => {
+        let span = `<span>${char}</span>`;
+	typingText.innerHTML += span;
     });
     typingText.querySelectorAll("span")[0].classList.add("active");
     document.addEventListener("keydown", () => inpField.focus());
@@ -43,6 +61,7 @@ function initTyping() {
         if(typedChar == null) {
             // Backspace
             if(charIndex > 0) {
+                playKeySound()
                 charIndex--;
                 if(characters[charIndex].classList.contains("incorrect")) {
                     mistakes--;
@@ -52,6 +71,7 @@ function initTyping() {
             }
         } else {
             if(characters[charIndex].innerText == typedChar) {
+                playKeySound()
                 if(characters[charIndex].classList.contains("deleted")) {
                     // Leave a tail
                     characters[charIndex].classList.add("corrected");
@@ -59,6 +79,7 @@ function initTyping() {
                     characters[charIndex].classList.add("correct");
                 }
             } else {
+                playErrorSound()
                 mistakes++;
                 characters[charIndex].classList.add("incorrect");
             }
@@ -101,6 +122,7 @@ function resetGame() {
     mistakeTag.innerText = 0;
     cpmTag.innerText = 0;
 }
+
 
 loadParagraph();
 inpField.addEventListener("input", initTyping);
